@@ -16,8 +16,9 @@ RUN echo "requires 'Perl::Critic';" > cpanfile
 
 COPY . .
 
-RUN cpanm Carton && \
-  carton install
+RUN cpanm Carton
+
+RUN carton install
 
 RUN wget -q -O - "https://github.com/reviewdog/reviewdog/releases/download/v${REVIEWDOG_VERSION}/reviewdog_${REVIEWDOG_VERSION}_$(uname -s)_$(uname -m).tar.gz" | tar xzvf - reviewdog && \
   mv reviewdog /usr/local/bin

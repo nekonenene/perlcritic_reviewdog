@@ -1,9 +1,13 @@
-DOCKER_IMG_TAG := 0.0.1
+DOCKER_IMG_TAG := 0.0.2
 PERLCRITIC_TARGET_PATH := src
 
 .PHONY: build
 build:
 	docker build . -t perlcritic_reviewdog:${DOCKER_IMG_TAG}
+
+.PHONY: build_no_cache
+build_no_cache:
+	docker build . -t perlcritic_reviewdog:${DOCKER_IMG_TAG} --no-cache
 
 .PHONY: run
 run:
