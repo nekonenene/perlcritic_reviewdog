@@ -12,6 +12,8 @@ RUN apt-get update && \
     git \
     wget
 
+RUN echo "requires 'Perl::Critic';" > cpanfile
+
 COPY . .
 
 RUN cpanm Carton && \
