@@ -30,7 +30,7 @@ reviewdog:
 		-v $(shell pwd)/src:/home/perl/src \
 		perlcritic_reviewdog:${DOCKER_IMG_TAG} /bin/bash -c \
 			"carton exec perlcritic --severity=1 --verbose='%f:%l:%c:**%m**, near <code>%r</code>.<br>(Ref: [%p](https://metacpan.org/pod/Perl::Critic::Policy::%p))\n' ${PERLCRITIC_TARGET_PATH} \
-			| reviewdog -efm=%f:%l:%c:%m -name=perlcritic -diff='git diff master'"
+			| reviewdog -efm=%f:%l:%c:%m -diff='git diff master'"
 
 .PHONY: reviewdog_pr
 reviewdog_pr:
