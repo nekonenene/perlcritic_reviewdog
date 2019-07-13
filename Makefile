@@ -12,3 +12,9 @@ run:
 perlcritic:
 	docker run -it --rm perlcritic_reviewdog:${DOCKER_IMG_TAG} /bin/bash -c \
 		"carton exec perlcritic --severity=1 --verbose='%f:%l:%c:**%m**, near <code>%r</code>.<br>(Ref: [%p](https://metacpan.org/pod/Perl::Critic::Policy::%p))\n' *.pl"
+
+.PHONY: reviewdog
+reviewdog:
+	docker run -it --rm perlcritic_reviewdog:${DOCKER_IMG_TAG} /bin/bash -c \
+		"carton exec perlcritic --severity=1 --verbose='%f:%l:%c:**%m**, near <code>%r</code>.<br>(Ref: [%p](https://metacpan.org/pod/Perl::Critic::Policy::%p))\n' *.pl \
+		| reviewdog -efm=%f:%l:%c:%m -name=perlcritic -diff='git diff master'"
