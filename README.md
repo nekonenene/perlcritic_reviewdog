@@ -10,6 +10,8 @@
 
 ## Usage
 
+### 基本的な使い方
+
 まずはこのリポジトリを git clone します。その後、
 
 ```sh
@@ -37,4 +39,16 @@ make reviewdog
 ```
 
 今度は出力が得られたはずです。  
-master ブランチとの差分で、 perlcritic で指摘されるもののみが出力されました。
+perlcritic で指摘されるもののうち、master ブランチとの差分に関わる箇所のみが出力されました。
+
+
+### プルリクへの reviewdog コメントをローカルから付ける例
+
+1. https://github.com/settings/tokens から、『Generate new token』ボタンよりトークンを作成  
+    権限は「public_repo」のみにチェック（非公開リポジトリならば「repo」にチェック）
+2. プルリクエストを作成 （例: https://github.com/nekonenene/perlcritic_reviewdog/pull/1 ）
+3. トークン文字列およびプルリクIDをもとに、以下のコマンド  
+    ```sh
+    make reviewdog_pr REVIEWDOG_GITHUB_API_TOKEN="xxxxxx" CI_PULL_REQUEST=1
+    ```
+    結果、 https://github.com/nekonenene/perlcritic_reviewdog/pull/1 にコメントが行われる
